@@ -24,3 +24,62 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Syntax highlighting styles */
+@import 'highlight.js/styles/github-dark.css';
+
+/* Custom markdown styles */
+.markdown-content {
+  line-height: 1.6;
+}
+
+.markdown-content > *:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-content > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Code block improvements */
+.markdown-content pre {
+  background-color: rgb(246 248 250 / 0.05);
+  border: 1px solid rgb(0 0 0 / 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown-content pre {
+    background-color: rgb(255 255 255 / 0.02);
+    border: 1px solid rgb(255 255 255 / 0.08);
+  }
+}
+
+/* Table improvements */
+.markdown-content table {
+  border-collapse: collapse;
+}
+
+.markdown-content table tbody tr:nth-child(even) {
+  background-color: rgb(0 0 0 / 0.02);
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown-content table tbody tr:nth-child(even) {
+    background-color: rgb(255 255 255 / 0.02);
+  }
+}
+
+/* Email formatting for Gmail tool responses */
+.markdown-content .email-item {
+  border-left: 4px solid #3b82f6;
+  padding-left: 12px;
+  margin: 12px 0;
+  background-color: rgb(59 130 246 / 0.05);
+  border-radius: 0 8px 8px 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown-content .email-item {
+    background-color: rgb(59 130 246 / 0.1);
+  }
+}

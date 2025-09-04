@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import { useState } from 'react';
+import { MarkdownRenderer } from '../components/MarkdownRenderer';
 
 export default function Home() {
   const { messages, sendMessage, status } = useChat({
@@ -38,20 +39,28 @@ export default function Home() {
             Chat with an AI Assistant
           </h3>
 
-          <div className="space-y-2 mb-4 flex-1 overflow-y-auto min-h-0">
+          <div className="space-y-4 mb-4 flex-1 overflow-y-auto min-h-0">
             {messages.map(message => (
-              <div key={message.id} className={`p-3 rounded-lg ${message.role === 'user'
+              <div key={message.id} className={`p-4 rounded-lg ${message.role === 'user'
                 ? 'bg-foreground/[.05] border border-foreground/[.08]'
                 : 'bg-foreground/[.02] border border-foreground/[.05]'
                 }`}>
-                <strong className="text-foreground/[.87]">
-                  {message.role === 'user' ? 'You: ' : 'AI: '}
-                </strong>
-                <span className="text-foreground/[.70]">
+                <div className="flex items-center mb-2">
+                  <strong className="text-foreground/[.87] text-sm font-medium">
+                    {message.role === 'user' ? 'You' : 'AI Assistant'}
+                  </strong>
+                  <div className={`ml-2 w-2 h-2 rounded-full ${message.role === 'user' ? 'bg-blue-500' : 'bg-green-500'
+                    }`} />
+                </div>
+                <div className="text-foreground/[.85]">
                   {message.parts.map((part, index) =>
-                    part.type === 'text' ? <span key={index}>{part.text}</span> : null,
+                    part.type === 'text' ? (
+                      <MarkdownRenderer key={index}>
+                        {part.text}
+                      </MarkdownRenderer>
+                    ) : null
                   )}
-                </span>
+                </div>
               </div>
             ))}
           </div>
